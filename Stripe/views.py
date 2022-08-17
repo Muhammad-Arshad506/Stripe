@@ -62,16 +62,15 @@ def checkout_stripe(request):
 
 
 
-@api_view(["GET"])
+@api_view(["GET","POST"])
 def stripe_web_hook(request):
     endpoint_secret = 'whsec_7b5f9af3a604e5566094b1c731217e36877a4855daf607515d5f507ae439009a'
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
     event = None
-
     try:
         event = stripe.Webhook.construct_event(
-            payload, sig_header
+            payload, sig_header,endpoint_secret
         )
     except ValueError as e:
         # Invalid payload
@@ -83,6 +82,7 @@ def stripe_web_hook(request):
     # Handle the checkout.session.completed event
     if event['type'] == 'checkout.session.completed':
         print("Payment was successful.")
+        print(event["data"]["object"]["payment_status"])
         # TODO: run some custom code here
 
     return Response(status=200)

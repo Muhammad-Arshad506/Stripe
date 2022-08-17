@@ -23,5 +23,6 @@ urlpatterns = [
     path('webHook/',stripe_web_hook),
     path('success/',success),
     path('failure/',failure),
+    path('webhook/',stripe_web_hook),
 
 ]
