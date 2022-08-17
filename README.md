@@ -25,3 +25,7 @@ After the user clicks the purchase button we need to do the following:
 - Set up the webhook endpoint
 - Test the endpoint using the Stripe CLI
 - Register the endpoint with Stripe
+
+
+for detail tutorial follow the below link
+[https://testdriven.io/blog/django-stripe-tutorial/]
